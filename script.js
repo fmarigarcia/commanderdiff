@@ -64,12 +64,10 @@ function updateCountMap(map, cards) {
 }
 
 function clearList(element) {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
-  }
+  element.replaceChildren();
 }
 
-function sortStatsEntries([cardA, countA], [cardB, countB]) {
+function compareStatsEntries([cardA, countA], [cardB, countB]) {
   if (countA !== countB) {
     return countB - countA;
   }
@@ -80,7 +78,7 @@ function sortStatsEntries([cardA, countA], [cardB, countB]) {
 function renderStatsList(element, countMap, totalComparisons) {
   clearList(element);
 
-  const entries = Object.entries(countMap).sort(sortStatsEntries);
+  const entries = Object.entries(countMap).sort(compareStatsEntries);
 
   if (!entries.length) {
     const item = document.createElement("li");
