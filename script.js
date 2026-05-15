@@ -69,10 +69,18 @@ function clearList(element) {
   }
 }
 
+function sortStatsEntries([cardA, countA], [cardB, countB]) {
+  if (countA !== countB) {
+    return countB - countA;
+  }
+
+  return cardA.localeCompare(cardB);
+}
+
 function renderStatsList(element, countMap, totalComparisons) {
   clearList(element);
 
-  const entries = Object.entries(countMap).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  const entries = Object.entries(countMap).sort(sortStatsEntries);
 
   if (!entries.length) {
     const item = document.createElement("li");
@@ -133,12 +141,12 @@ compareButton.addEventListener("click", () => {
   const baseSet = new Set(data.baseDeck);
   const currentSet = new Set(deck);
 
-  const added = deck.filter((card) => !baseSet.has(card));
-  const removed = data.baseDeck.filter((card) => !currentSet.has(card));
+  const added = [...currentSet].filter((card) => !baseSet.has(card));
+  const removed = [...baseSet].filter((card) => !currentSet.has(card));
 
   data.comparisonsCount += 1;
-  updateCountMap(data.addedCounts, [...new Set(added)]);
-  updateCountMap(data.removedCounts, [...new Set(removed)]);
+  updateCountMap(data.addedCounts, added);
+  updateCountMap(data.removedCounts, removed);
 
   saveData();
   render();
