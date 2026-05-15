@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Commander Diff</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Commander Diff</h1>
+      <p class="subtitle">
+        Save your precon deck as a base, then compare upgraded versions to track
+        which cards are added and removed.
+      </p>
+
+      <section class="panel">
+        <h2>Deck Input</h2>
+        <label for="deckInput">Paste deck list (one card per line)</label>
+        <textarea
+          id="deckInput"
+          rows="16"
+          placeholder="1 Sol Ring\n1 Arcane Signet\n1 Command Tower"
+        ></textarea>
+        <div class="actions">
+          <button id="setBaseButton" type="button">Save as Base Deck</button>
+          <button id="compareButton" type="button">Compare Upgrade</button>
+          <button id="resetButton" type="button" class="danger">Reset</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Stats</h2>
+        <p id="baseStatus">No base deck saved yet.</p>
+        <p id="comparisonStatus">Compared decks: 0</p>
+
+        <div class="lists">
+          <div>
+            <h3>Most Added Cards</h3>
+            <ul id="addedList"></ul>
+          </div>
+          <div>
+            <h3>Most Removed Cards</h3>
+            <ul id="removedList"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
